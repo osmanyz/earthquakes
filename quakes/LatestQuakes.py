@@ -47,18 +47,14 @@ class LatestQuakes:
         for item in readers:
             ml = item.find("div")
             href = self.href_replace(ml)
-
-            parse = self.url_parser(href)
-            lat = parse['lat']
-            lon = parse['lon']
-
+            coordinate = self.url_parser(href)
             name = self.name_replace(item)
             date = self.date_replace(item)
 
             results.append({'href': href,
                             'text': ml.text,
-                            'lat': lat,
-                            'lon': lon,
+                            'lat': coordinate['lat'],
+                            'lon': coordinate['lon'],
                             'name': name,
                             'deep': date['deep'],
                             'time': date['time'],
