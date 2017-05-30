@@ -40,7 +40,7 @@ class LatestQuakes:
 
         return {'deep': deep, 'time': time, 'hours': hours}
 
-    def latest_quakes(self):
+    def latest_quakes(self, limit_start=None, limit_end=None, limit_step=None):
         results = []
         readers = self.reader(self).select('table > tr')
 
@@ -65,12 +65,14 @@ class LatestQuakes:
                             'hours': date['hours'],
                             })
 
+        if (limit_start is not None) or (limit_end is not None) or (limit_step is not None):
+            return results[limit_start:limit_end:limit_step]
+
         return results
 
     @staticmethod
-    def work():
-        return LatestQuakes.latest_quakes(LatestQuakes)
-
+    def work(limit_start=None, limit_end=None, limit_step=None):
+        return LatestQuakes.latest_quakes(LatestQuakes, limit_start, limit_end, limit_step)
 
 if __name__ == '__main__':
     quake = LatestQuakes()
