@@ -7,8 +7,8 @@ import re
 page = urlopen("http://m.koeri.boun.edu.tr/dbs/deprem-listesi-touch.asp?sort=tarih&sira=desc&kull_lat=&kull_lon=")
 read = BeautifulSoup(page, "html.parser")
 data = []
-count = 0
 
+# example pure code
 for item in read.select('table > tr'):
     # ml information
     ml = item.find("div")
@@ -39,3 +39,5 @@ for item in read.select('table > tr'):
     hours = re.search(r'(\d+:\d+:\d+)', date).group(1)
 
     data.append({'ml_href': ml_href, 'ml_text': ml_text, 'lat': lat, 'lon': lon, 'name': name, 'deep': deep, 'time': time, 'hours': hours})
+
+print(data)
