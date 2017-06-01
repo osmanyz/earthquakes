@@ -9,6 +9,7 @@ class LatestQuakes:
     Son Depremlerin Listesi
     """
     PATH = 'http://m.koeri.boun.edu.tr/dbs/deprem-listesi-touch.asp?sort=tarih&sira=desc&kull_lat=&kull_lon='
+    data = []
 
     def __init__(self, path=None):
         self.PATH = path if path is not None else self.PATH
@@ -41,7 +42,7 @@ class LatestQuakes:
         return {'deep': deep, 'time': time, 'hours': hours}
 
     def latest_quakes(self, limit_start=None, limit_end=None, limit_step=None):
-        results = []
+        self.data = []
         readers = self.reader(self).select('table > tr')
 
         for item in readers:
@@ -51,20 +52,16 @@ class LatestQuakes:
             name = self.name_replace(item)
             date = self.date_replace(item)
 
-            results.append({'href': href,
-                            'text': ml.text,
-                            'lat': coordinate['lat'],
-                            'lon': coordinate['lon'],
-                            'name': name,
-                            'deep': date['deep'],
-                            'time': date['time'],
-                            'hours': date['hours'],
-                            })
+            self.data.append({'href': href, 'text': ml.text, 'latitude': coordinate['lat'], 'longitude': coordinate['lon'], 'name': name, 'deep': date['deep'], 'time': date['time'], 'hours': date['hours']})
 
         if (limit_start is not None) or (limit_end is not None) or (limit_step is not None):
-            return results[limit_start:limit_end:limit_step]
+            return self.data[limit_start:limit_end:limit_step]
 
-        return results
+        return self.data
+
+    @staticmethod
+    def count():
+        return len(LatestQuakes.data)
 
     @staticmethod
     def work(limit_start=None, limit_end=None, limit_step=None):
