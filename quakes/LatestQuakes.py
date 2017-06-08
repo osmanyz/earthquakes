@@ -8,6 +8,7 @@ class LatestQuakes:
     """
     Son Depremlerin Listesi
     """
+    # http://www.deprem.gov.tr/tr/sondepremler
     PATH = 'http://m.koeri.boun.edu.tr/dbs/deprem-listesi-touch.asp?sort=tarih&sira=desc&kull_lat=&kull_lon='
     data = []
 
