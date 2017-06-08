@@ -1,6 +1,8 @@
 # Son Depremler
 Python 3 ile Son Depremleri görüntüleyebilirsiniz.
 
+![Earthquakes](http://blog.astald.com/wp-content/uploads/2017/06/Screen-Shot-2017-06-01-at-16.52.24.png)
+
 ### Kurulum için gerekenler:
 
  * python3
